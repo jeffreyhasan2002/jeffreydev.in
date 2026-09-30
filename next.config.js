@@ -3,6 +3,11 @@ const nextConfig = {
   pageExtensions: ['page.jsx'],
   reactStrictMode: false, // GSAP timelines and WebGL contexts are set up imperatively; avoid double-mount in dev.
 
+  // Bundle server dependencies instead of loading them as Node externals. three.js now ships
+  // `three.cjs` as a require(esm) shim, and on Node 24 (Vercel) externals like @react-three/fiber
+  // importing `three` while it is being required fail with ERR_REQUIRE_ESM_RACE_CONDITION.
+  bundlePagesRouterDependencies: true,
+
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [60, 75, 85, 100],
