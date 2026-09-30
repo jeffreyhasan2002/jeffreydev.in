@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
-// eslint-disable-next-line import/prefer-default-export
+export const DEFAULT_FLUID_COLOR = '#d7d7d4';
+
 export const useStore = create((set) => ({
   lenis: undefined,
   setLenis: (lenis) => set({ lenis }),
@@ -10,7 +11,7 @@ export const useStore = create((set) => ({
   setIsMenuOpen: (isMenuOpen) => set({ isMenuOpen }),
   isLoading: true,
   setIsLoading: (isLoading) => set({ isLoading }),
-  fluidColor: '#d7d7d4',
+  fluidColor: DEFAULT_FLUID_COLOR,
   setFluidColor: (fluidColor) => set({ fluidColor }),
   isAbout: false,
   setIsAbout: (isAbout) => set({ isAbout }),

@@ -1,40 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['page.jsx'],
-  experimental: {
-    // optimizeCss: true,
-    // nextScriptWorkers: true,
-  },
-  // uncomment the following snippet if using styled components
-  // compiler: {
-  //   styledComponents: true,
-  // },
-  reactStrictMode: false, // Recommended for the `pages` directory, default in `app`.
+  reactStrictMode: false, // GSAP timelines and WebGL contexts are set up imperatively; avoid double-mount in dev.
 
-  images: {},
-  webpack(config, { isServer }) {
-    // config.resolve.alias = {
-    //   ...config.resolve.alias,
-    //   '@': path.resolve(__dirname),
-    //   '@src/': path.resolve(__dirname, 'src'),
-    //   '@app/': path.resolve(__dirname, 'app'),
-    // };
-    if (!isServer) {
-      // We're in the browser build, so we can safely exclude the sharp module
-      config.externals.push('sharp');
-    }
-    // shader support
-    config.module.rules.push({
-      test: /\.(glsl|vs|fs|vert|frag)$/,
-      exclude: /node_modules/,
-      use: ['raw-loader', 'glslify-loader'],
-    });
-
-    return config;
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    qualities: [60, 75, 85, 100],
   },
+
+  // Shaders are plain JS string modules (src/components/canvas/**/glsl), so no custom
+  // webpack loaders are needed and the default Turbopack bundler works for dev and build.
+
   headers: async () => [
     {
-      source: '/(.*)',
+      // Dev-only manifests are served as JSON with a .js name; nosniff would block them.
+      source: '/((?!_next/static/development).*)',
       headers: [
         {
           key: 'X-Content-Type-Options',

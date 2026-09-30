@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .topContainer {
   width: 100%;
@@ -91,15 +91,15 @@
       }
     }
     .rightContainer {
+      background-color: var(--white);
+      box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 5) var(--white);
+
+      width: 50%;
       @include mobile {
         width: 100%;
         background-color: transparent;
         box-shadow: none;
       }
-      background-color: var(--white);
-      box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 5) var(--white);
-
-      width: 50%;
       .category {
         padding: calc(var(--layout-columns-gap) * 4) 0;
         display: flex;
@@ -178,10 +178,6 @@
   }
 }
 .hoverTextContainer {
-  @include mobile {
-    width: 50%;
-    bottom: var(--layout-columns-gap);
-  }
 
   padding: calc(var(--layout-columns-gap) * 0.5);
   z-index: 2;
@@ -194,6 +190,10 @@
   flex-direction: column;
 
   gap: calc(var(--layout-columns-gap) * 0.5);
+  @include mobile {
+    width: 50%;
+    bottom: var(--layout-columns-gap);
+  }
   > div:nth-child(1) {
     animation-delay: 100ms;
   }

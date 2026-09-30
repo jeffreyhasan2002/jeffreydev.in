@@ -216,7 +216,6 @@ function Home() {
   };
 
   const renderRects = useMemo(
-    // eslint-disable-next-line no-return-assign
     () => initialPositions.map(({ index, x, y }) => <rect key={index} ref={(ref) => (rectRefs.current[index] = ref)} x={x} y={y} width={`${gridWidth}%`} height={`${gridHeight}%`} />),
     [initialPositions, gridWidth, gridHeight],
   );

@@ -1,8 +1,5 @@
 import * as THREE from 'three';
 
-/* eslint-disable no-plusplus */
-/* eslint-disable @react-three/no-new-in-loop */
-/* eslint-disable no-shadow */
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { InstancedRigidBodies } from '@react-three/rapier';

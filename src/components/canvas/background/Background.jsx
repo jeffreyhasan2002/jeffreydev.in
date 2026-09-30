@@ -4,7 +4,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 
 import fragmentShader from '@src/components/canvas/background/shaders/fragmentShader';
-import { useWindowSize } from '@darkroom.engineering/hamo';
+import useWindowSize from '@src/hooks/useWindowSize';
 import vertexShader from '@src/components/canvas/background/shaders/vertexShader';
 
 const OFFSET_STEP = 0.00005;

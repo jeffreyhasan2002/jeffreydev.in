@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .menu {
   position: fixed;
@@ -18,9 +18,6 @@
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   padding-top: calc(var(--layout-columns-gap) * 2);
   padding-bottom: calc(var(--layout-columns-gap) * 2);
 
@@ -29,6 +26,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .menuClose {
     position: absolute;

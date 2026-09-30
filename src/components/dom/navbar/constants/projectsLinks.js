@@ -1,15 +1,8 @@
-const projectsLinks = [
-  {
-    title: 'Jeffreyco E-commerce',
-    href: '/projects/jeffreyco-ecommerce',
-  },
-  {
-    title: 'Lattis Bin',
-    href: '/projects/lattis-bin',
-  },
-  {
-    title: 'Connie AI',
-    href: '/projects/connie-ai',
-  },
-];
+import { featuredProjects } from '@src/constants/projects';
+
+const projectsLinks = featuredProjects.map((project) => ({
+  title: project.title,
+  href: project.link,
+}));
+
 export default projectsLinks;

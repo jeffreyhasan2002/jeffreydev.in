@@ -42,13 +42,16 @@ function About() {
 
   const renderImageContainer = () => (
     <div className={styles.imageContainer}>
-      <Image 
-        priority 
-        src="/giats/front.webp" 
-        sizes="100%" 
-        fill 
+      <Image
+        preload
+        quality={85}
+        src="/giats/front.jpeg"
+        sizes="(max-width: 812px) 90vw, 46vw"
+        fill
         alt="Jeffrey Hasan"
-        style={{ objectFit: 'cover' }}  // Add this line to ensure the image covers the container
+        // The frame is wider than the portrait, so `cover` crops vertically. Anchor to the top so
+        // the crop only ever trims the bottom and the head is never cut.
+        style={{ objectFit: 'cover', objectPosition: 'center top' }}
       />
     </div>
   );

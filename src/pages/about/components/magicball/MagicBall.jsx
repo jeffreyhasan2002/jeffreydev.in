@@ -6,7 +6,6 @@ import { Environment, Sphere, Text, View, useTexture } from '@react-three/drei';
 import { createPortal, extend, useFrame } from '@react-three/fiber';
 import { useMemo, useRef, useState } from 'react';
 
-import PropTypes from 'prop-types';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 
 extend({ RoundedBoxGeometry });
@@ -82,13 +81,6 @@ function Marble({ roughness, color, isSphere, text }) {
     </>
   );
 }
-
-MagicBall.propTypes = {
-  roughness: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
-  isSphere: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
-};
 
 const sNoiseFuncs = `
 vec3 mod289(vec3 x) {

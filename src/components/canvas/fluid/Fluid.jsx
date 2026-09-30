@@ -1,5 +1,3 @@
-/* eslint-disable @react-three/no-new-in-loop */
-
 import { Camera, Scene, Texture, Vector2, Vector3 } from 'three';
 import { createPortal, useFrame, useThree } from '@react-three/fiber';
 import { useCallback, useRef } from 'react';
@@ -110,6 +108,9 @@ function Fluid({ mainRef, fluidColor }) {
     setUniforms('advection', 'uSource', FBOs.density.read.texture);
     setUniforms('advection', 'uDissipation', densityDissipation);
     setRenderTarget('density');
+
+    // The density buffer ping-pongs every frame; always composite the latest one.
+    postRef.current.setTexture?.(FBOs.density.read.texture);
 
     gl.setRenderTarget(null);
     gl.clear();

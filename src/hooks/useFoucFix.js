@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import { useEffect } from 'react';
 
 // Temporary fix to avoid flash of unstyled content (FOUC) during route transitions.

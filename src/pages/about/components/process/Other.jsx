@@ -1,11 +1,10 @@
-/* eslint-disable react/no-array-index-key */
 import { Fragment, memo, useCallback, useRef } from 'react';
 
 import AppearByWords from '@src/components/animationComponents/appearByWords/Index';
 import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
 import Arrow from '@src/components/imageComponents/Arrow';
 import MagicBall from '@src/pages/about/components/magicball/MagicBall';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import clsx from 'clsx';
 import containt from '@src/pages/about/components/process/constants/Containt';
 import { gsap } from 'gsap';
@@ -14,7 +13,7 @@ import useIsMobile from '@src/hooks/useIsMobile';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
-import { useWindowSize } from '@darkroom.engineering/hamo';
+import useWindowSize from '@src/hooks/useWindowSize';
 
 const colors = ['#444444', '#f2ffbd'];
 

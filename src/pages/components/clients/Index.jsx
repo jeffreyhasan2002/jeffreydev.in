@@ -7,7 +7,7 @@ import styles from '@src/pages/components/clients/styles/clients.module.scss';
 import useIsMobile from '@src/hooks/useIsMobile';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 import { useRef } from 'react';
-import { useWindowSize } from '@darkroom.engineering/hamo';
+import useWindowSize from '@src/hooks/useWindowSize';
 
 function Clients() {
   const isMobile = useIsMobile();
@@ -74,8 +74,8 @@ function Clients() {
             <h4 className={clsx('h4', 'bold')}>Someli AI</h4>
           </AppearTitle>
           <AppearTitle>
-           <div className="p-l">Developed responsive web applications for</div>
-            <div className="p-l">Someli AI's innovative social media content</div>
+            <div className="p-l">Developed responsive web applications for</div>
+            <div className="p-l">Someli AI&apos;s innovative social media content</div>
             <div className="p-l">generation platform using Vue.js, Nuxt.js,</div>
             <div className="p-l">and TypeScript. Implemented advanced front-end</div>
             <div className="p-l">architectures with Tailwind CSS, creating</div>
@@ -102,13 +102,13 @@ function Clients() {
             </AppearTitle>
             <AppearTitle>
               <div className="p-l">Developed responsive web applications for</div>
-            <div className="p-l">Someli AI's innovative social media content</div>
-            <div className="p-l">generation platform using Vue.js, Nuxt.js,</div>
-            <div className="p-l">and TypeScript. Implemented advanced front-end</div>
-            <div className="p-l">architectures with Tailwind CSS, creating</div>
-            <div className="p-l">dynamic and adaptive user interfaces.</div>
-            <div className="p-l">Engineered AI-powered content creation tools</div>
-            <div className="p-l">leveraging JavaScript and modern web tech.</div>
+              <div className="p-l">Someli AI&apos;s innovative social media content</div>
+              <div className="p-l">generation platform using Vue.js, Nuxt.js,</div>
+              <div className="p-l">and TypeScript. Implemented advanced front-end</div>
+              <div className="p-l">architectures with Tailwind CSS, creating</div>
+              <div className="p-l">dynamic and adaptive user interfaces.</div>
+              <div className="p-l">Engineered AI-powered content creation tools</div>
+              <div className="p-l">leveraging JavaScript and modern web tech.</div>
             </AppearTitle>
           </div>
         </>
@@ -160,11 +160,11 @@ function Clients() {
             </AppearTitle>
             <AppearTitle>
               <div className="p-l">Developed React-based Nike shoe e-commerce</div>
-            <div className="p-l">platform. Implemented RESTful API integration,</div>
-            <div className="p-l">fetching product data from designer mock API</div>
-            <div className="p-l">with 99% accuracy. Optimized site performance,</div>
-            <div className="p-l">achieving a 25% reduction in load time and</div>
-            <div className="p-l">ensuring cross-browser compatibility.</div>
+              <div className="p-l">platform. Implemented RESTful API integration,</div>
+              <div className="p-l">fetching product data from designer mock API</div>
+              <div className="p-l">with 99% accuracy. Optimized site performance,</div>
+              <div className="p-l">achieving a 25% reduction in load time and</div>
+              <div className="p-l">ensuring cross-browser compatibility.</div>
             </AppearTitle>
           </div>
           <div className={styles.fourthEmpty} />
@@ -216,12 +216,12 @@ function Clients() {
               <h4 className={clsx('h4', 'bold', styles.title)}>Freelance Developer</h4>
             </AppearTitle>
             <AppearTitle>
-            <div className="p-l">Handled clients across Australia, Malaysia,</div>
-            <div className="p-l">and Abu Dhabi, creating front-end websites</div>
-            <div className="p-l">and web applications. Delivered custom</div>
-            <div className="p-l">solutions tailored to client requirements,</div>
-            <div className="p-l">focusing on responsive design and optimal</div>
-            <div className="p-l">user experience for diverse markets.</div>
+              <div className="p-l">Handled clients across Australia, Malaysia,</div>
+              <div className="p-l">and Abu Dhabi, creating front-end websites</div>
+              <div className="p-l">and web applications. Delivered custom</div>
+              <div className="p-l">solutions tailored to client requirements,</div>
+              <div className="p-l">focusing on responsive design and optimal</div>
+              <div className="p-l">user experience for diverse markets.</div>
             </AppearTitle>
           </div>
         </>

@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import '@src/styles/global.scss';
 import '@src/styles/global.css';
 
@@ -7,7 +5,7 @@ import * as THREE from 'three';
 
 import { useMemo, useRef } from 'react';
 
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 import Background from '@src/components/canvas/background/Index';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
@@ -16,15 +14,13 @@ import Layout from '@src/components/dom/Layout';
 import Lenis from 'lenis';
 import Loader from '@src/components/dom/Loader';
 import Navbar from '@src/components/dom/navbar/Index';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Scrollbar from '@src/components/dom/Scrollbar';
 // import Stats from '@src/components/stats/Index';
-import Tempus from '@darkroom.engineering/tempus';
 import { View } from '@react-three/drei';
 import { gsap } from 'gsap';
 import styles from '@src/pages/app.module.scss';
 import useFoucFix from '@src/hooks/useFoucFix';
-import { useFrame } from '@darkroom.engineering/hamo';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 import useScroll from '@src/hooks/useScroll';
 import { useShallow } from 'zustand/react/shallow';
@@ -34,11 +30,8 @@ if (typeof window !== 'undefined') {
   gsap.defaults({ ease: 'none' });
   gsap.registerPlugin(ScrollTrigger);
 
+  // Lenis is driven from the GSAP ticker (see below), so both share one rAF loop.
   gsap.ticker.lagSmoothing(0);
-  gsap.ticker.remove(gsap.updateRoot);
-  Tempus?.add((time) => {
-    gsap.updateRoot(time / 1000);
-  }, 0);
 
   window.scrollTo(0, 0);
   window.history.scrollRestoration = 'manual';
@@ -56,19 +49,25 @@ function MyApp({ Component, pageProps, router }) {
   useScroll(() => ScrollTrigger.update());
 
   useIsomorphicLayoutEffect(() => {
-    // eslint-disable-next-line no-shadow
     const lenis = new Lenis({
+      autoRaf: false,
+      lerp: 0.09,
       smoothWheel: true,
-      smoothTouch: true,
       syncTouch: true,
+      syncTouchLerp: 0.08,
+      touchInertiaExponent: 1.7,
       wrapper: mainRef.current || undefined,
       content: mainContainerRef.current || undefined,
     });
+
+    const raf = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(raf);
 
     setLenis(lenis);
     lenis.stop();
 
     return () => {
+      gsap.ticker.remove(raf);
       lenis.destroy();
       setLenis(null);
     };
@@ -79,12 +78,6 @@ function MyApp({ Component, pageProps, router }) {
       ScrollTrigger.refresh();
     }
   }, [lenis]);
-
-  useFrame((time) => {
-    if (lenis) {
-      lenis.raf(time);
-    }
-  }, 0);
 
   const domElements = useMemo(
     () => (

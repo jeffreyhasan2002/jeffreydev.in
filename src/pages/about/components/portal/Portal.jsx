@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 const FADE_OUT_DURATION = 450;
@@ -32,15 +31,5 @@ function Portal({ children, fadeIn, container }) {
 
   return portalContainer ? ReactDOM.createPortal(children, portalContainer) : null;
 }
-
-Portal.propTypes = {
-  children: PropTypes.node.isRequired,
-  fadeIn: PropTypes.bool.isRequired,
-  container: typeof window !== 'undefined' ? PropTypes.instanceOf(Element) : PropTypes.any,
-};
-
-Portal.defaultProps = {
-  container: typeof window !== 'undefined' ? document.body : null,
-};
 
 export default Portal;

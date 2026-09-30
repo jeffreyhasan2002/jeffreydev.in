@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .btnPosnawr {
   position: relative;
@@ -52,10 +52,10 @@
   .labelClassic {
     z-index: 2;
     line-height: 46%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.1, 1);
     @include mobile {
       line-height: 100%;
     }
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.1, 1);
   }
 
   .arrowClassic {

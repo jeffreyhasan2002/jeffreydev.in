@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .background {
   height: 100%;
@@ -49,15 +49,15 @@
     height: 100svh !important;
     width: 100%;
     /* Hide scrollbar for Chrome, Safari and Opera */
-    ::-webkit-scrollbar {
-      display: none;
-      --webkit-appearance: none;
-    }
 
     /* Hide scrollbar for IE, Edge and Firefox */
 
     -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+      display: none;
+      --webkit-appearance: none;
+    } /* Firefox */
 
     .mainContainer {
       height: auto;

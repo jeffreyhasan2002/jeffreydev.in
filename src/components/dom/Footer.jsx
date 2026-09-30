@@ -1,7 +1,7 @@
 import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
 import Link from 'next/link';
 import LinkText from '@src/components/animationComponents/linkText/Index';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import footerLinks from '@src/components/dom/navbar/constants/footerLinks';
@@ -13,7 +13,7 @@ import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect'
 import { useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
-import { useWindowSize } from '@darkroom.engineering/hamo';
+import useWindowSize from '@src/hooks/useWindowSize';
 
 const Time = dynamic(() => import('@src/components/dom/Time'), { ssr: false });
 const GoTop = dynamic(() => import('@src/components/dom/GoTop'), { ssr: false });
@@ -125,7 +125,7 @@ function Footer() {
       </div>
       <div className={styles.middleContainer} style={{ gridColumn: '13 / 17', textAlign: isMobile ? 'left' : 'right' }}>
         <AppearTitle isFooter>
-          <div className="p-x">© 2025 · Jeffrey Hasan</div>
+          <div className="p-x">© {new Date().getFullYear()} · Jeffrey Hasan</div>
           <div className={clsx('p-x', styles.middleText)}>All Rights Reserved</div>
         </AppearTitle>
       </div>

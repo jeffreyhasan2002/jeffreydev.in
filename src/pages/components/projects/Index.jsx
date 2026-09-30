@@ -1,19 +1,17 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable no-nested-ternary */
 import AppearByWords from '@src/components/animationComponents/appearByWords/Index';
 import ButtonLink from '@src/components/animationComponents/buttonLink/Index';
 import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
-import projects from '@src/constants/projects';
+import { featuredProjects } from '@src/constants/projects';
 import styles from '@src/pages/components/projects/styles/projects.module.scss';
 import useIsMobile from '@src/hooks/useIsMobile';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 import { useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
-import { useWindowSize } from '@darkroom.engineering/hamo';
+import useWindowSize from '@src/hooks/useWindowSize';
 
 function Projects() {
   const isMobile = useIsMobile();
@@ -23,7 +21,7 @@ function Projects() {
   const rootRef = useRef();
   const projectRefs = useRef([]);
 
-  const newProjects = [projects[0], projects[1], projects[4]];
+  const newProjects = featuredProjects;
 
   const setupProjectAnimations = () => {
     const ctx = gsap.context(() => {
@@ -85,16 +83,26 @@ function Projects() {
               >
                 <div className={clsx(styles.container, 'layout-grid-inner')}>
                   <div className={styles.projectsDetails}>
-                    <h6 className="h6">{project.date}</h6>
+                    <h6 className="h6">
+                      {project.date} — {project.sector}
+                    </h6>
                     <h3 className="h3">{project.title}</h3>
                   </div>
                   <div className={styles.imageContainer}>
-                    <Image src={project.img} fill sizes="100%" alt={project.title} />
+                    <Image src={project.img} fill sizes="(max-width: 812px) 83vw, 48vw" alt={project.title} />
                   </div>
                 </div>
               </div>
               <div ref={(el) => (projectRefs.current[index] = el)} className={styles.canvas}>
-                <Image priority className={index === 0 ? styles.firstCard : index === newProjects.length - 1 ? styles.lastCard : undefined} src={project.img} fill sizes="100%" alt={project.title} />
+                <Image
+                  preload={index === 0}
+                  quality={60}
+                  className={index === 0 ? styles.firstCard : index === newProjects.length - 1 ? styles.lastCard : undefined}
+                  src={project.img}
+                  fill
+                  sizes="100vw"
+                  alt=""
+                />
               </div>
             </Link>
           ))}

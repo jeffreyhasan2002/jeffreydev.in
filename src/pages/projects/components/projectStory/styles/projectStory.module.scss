@@ -1,0 +1,282 @@
+@use '@src/styles/functions' as *;
+
+// The story column is a "window" onto the WebGL background (see README: window effect),
+// so its text is always light regardless of the project's theme colours.
+$ink: #f3f3ef;
+
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--layout-columns-gap) * 7);
+  margin-top: calc(var(--layout-columns-gap) * 4.2);
+  padding: calc(var(--layout-columns-gap) * 3.5) calc(var(--layout-columns-gap) * 2.4) calc(var(--layout-columns-gap) * 4);
+  border-radius: var(--layout-columns-gap);
+  color: $ink;
+  box-shadow:
+    0 calc(var(--layout-columns-gap) * -4.3) 0 0 var(--white),
+    0 0 0 calc(var(--layout-columns-gap) * 1.2) var(--white);
+
+  @include mobile {
+    gap: calc(var(--layout-columns-gap) * 3);
+    margin-top: calc(var(--layout-columns-gap) * 1);
+    padding: calc(var(--layout-columns-gap) * 1.4) calc(var(--layout-columns-gap) * 0.5) calc(var(--layout-columns-gap) * 1.6);
+    border-radius: calc(var(--layout-columns-gap) * 0.5);
+    box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 0.5) var(--white);
+  }
+}
+
+.chapter {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--layout-columns-gap) * 2);
+  @include mobile {
+    gap: calc(var(--layout-columns-gap) * 0.8);
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--layout-columns-gap) * 0.7);
+  max-width: 40vw;
+  @include mobile {
+    max-width: none;
+    gap: calc(var(--layout-columns-gap) * 0.35);
+  }
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8vw;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  @include mobile {
+    gap: 2vw;
+  }
+
+  .line {
+    display: block;
+    width: 3vw;
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.6;
+    @include mobile {
+      width: 8vw;
+    }
+  }
+}
+
+.title {
+  line-height: 115%;
+}
+
+.body {
+  font-weight: 450;
+  opacity: 0.82;
+}
+
+// Screenshot inside a minimal browser chrome.
+.browser {
+  position: relative;
+  width: 100%;
+  border-radius: 0.9vw;
+  overflow: hidden;
+  background-color: #ececea;
+  box-shadow:
+    0 2.4vw 4vw -1.6vw rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  will-change: clip-path, transform;
+  @include mobile {
+    border-radius: 2vw;
+  }
+
+  .bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2vw;
+    padding: 0 0.9vw;
+    background-color: #ececea;
+    @include mobile {
+      height: 6vw;
+      padding: 0 2.5vw;
+    }
+  }
+
+  .dots {
+    position: absolute;
+    left: 0.9vw;
+    display: flex;
+    gap: 0.4vw;
+    @include mobile {
+      left: 2.5vw;
+      gap: 1vw;
+    }
+
+    > i {
+      display: block;
+      width: 0.65vw;
+      height: 0.65vw;
+      border-radius: 50%;
+      background-color: #ff5f57;
+      @include mobile {
+        width: 1.8vw;
+        height: 1.8vw;
+      }
+      &:nth-child(2) {
+        background-color: #febc2e;
+      }
+      &:nth-child(3) {
+        background-color: #28c840;
+      }
+    }
+  }
+
+  .url {
+    padding: 0.15vw 1.6vw;
+    border-radius: 9vw;
+    background-color: #fff;
+    color: #55555a;
+    letter-spacing: 0.02em;
+    @include mobile {
+      padding: 0.4vw 4vw;
+    }
+  }
+
+  .shot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    > img {
+      object-fit: cover;
+      object-position: top center;
+      will-change: transform;
+    }
+  }
+}
+
+// Three phones, drifting at different speeds.
+.phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(var(--layout-columns-gap) * 1.6);
+  padding: calc(var(--layout-columns-gap) * 2) calc(var(--layout-columns-gap) * 2);
+  @include mobile {
+    gap: calc(var(--layout-columns-gap) * 0.3);
+    padding: calc(var(--layout-columns-gap) * 0.8) 0;
+  }
+
+  .phone {
+    position: relative;
+    border-radius: 2.2vw;
+    padding: 1.6vw 0.45vw 0.45vw;
+    background-color: #111113;
+    box-shadow:
+      0 2vw 3.5vw -1.4vw rgba(0, 0, 0, 0.7),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    will-change: transform;
+    @include mobile {
+      border-radius: 5vw;
+      padding: 3.6vw 1.1vw 1.1vw;
+    }
+  }
+
+  // Speaker slot in the top bezel.
+  .notch {
+    position: absolute;
+    top: 0.6vw;
+    left: 50%;
+    z-index: 2;
+    width: 22%;
+    height: 0.45vw;
+    border-radius: 9vw;
+    background-color: #2a2a2e;
+    transform: translateX(-50%);
+    @include mobile {
+      top: 1.3vw;
+      height: 1.1vw;
+    }
+  }
+
+  .phoneScreen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 520 / 1125;
+    border-radius: 0.5vw 0.5vw 1.8vw 1.8vw;
+    overflow: hidden;
+    background-color: #fff;
+    @include mobile {
+      border-radius: 1.2vw 1.2vw 4vw 4vw;
+    }
+
+    > img {
+      object-fit: cover;
+      object-position: top center;
+    }
+  }
+}
+
+.outcome {
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid rgba(243, 243, 239, 0.25);
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .fact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6vw;
+    padding: 1.6vw 1.6vw 0 0;
+    @include mobile {
+      gap: 1vw;
+      padding: 4vw 0;
+      border-bottom: 1px solid rgba(243, 243, 239, 0.25);
+    }
+
+    & + .fact {
+      padding-left: 1.6vw;
+      border-left: 1px solid rgba(243, 243, 239, 0.25);
+      @include mobile {
+        padding-left: 0;
+        border-left: none;
+      }
+    }
+  }
+
+  .factValue {
+    line-height: 100%;
+    letter-spacing: -0.02em;
+  }
+
+  .factLabel {
+    font-weight: 450;
+    opacity: 0.7;
+  }
+
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--layout-columns-gap);
+    color: var(--black);
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .note {
+    color: $ink;
+    opacity: 0.55;
+  }
+}

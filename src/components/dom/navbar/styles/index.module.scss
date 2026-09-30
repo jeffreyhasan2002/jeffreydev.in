@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .root {
   position: fixed;
@@ -11,17 +11,19 @@
   width: 100%;
   pointer-events: none;
   scale: 1;
+  color: var(--black);
+  transition: color 0.35s ease-in-out;
   .innerHeader {
     height: 3.1vw;
-    @include mobile {
-      height: 6.5vw;
-    }
 
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    @include mobile {
+      height: 6.5vw;
+    }
 
     > a {
       pointer-events: all;

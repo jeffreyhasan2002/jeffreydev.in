@@ -18,18 +18,20 @@ function NextProject({ nextProject }) {
             <div className={styles.projectsWrap}>
               <div className={clsx(styles.container, 'layout-grid-inner')}>
                 <div className={styles.projectsDetails}>
-                  <h6 className={clsx(styles.text, 'h6')}>{nextProject.date}</h6>
+                  <h6 className={clsx(styles.text, 'h6')}>
+                    {nextProject.date} — {nextProject.sector}
+                  </h6>
 
                   <h3 className={clsx(styles.text, 'h3')}>{nextProject.title}</h3>
                 </div>
                 <div className={styles.imageContainer}>
-                  <Image priority sizes="100%" src={nextProject.img} fill alt={nextProject.title} />
+                  <Image sizes="(max-width: 812px) 83vw, 48vw" src={nextProject.img} fill alt={nextProject.title} />
                 </div>
               </div>
             </div>
 
             <div className={styles.canvas}>
-              <Image priority sizes="100%" src={nextProject.img} fill alt={nextProject.title} />
+              <Image sizes="100vw" quality={60} src={nextProject.img} fill alt="" />
             </div>
           </Link>
         </div>

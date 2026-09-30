@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-nested-ternary */
-
 import CustomHead from '@src/components/dom/CustomHead';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,11 +10,11 @@ import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect'
 import { useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
-import { useWindowSize } from '@darkroom.engineering/hamo';
+import useWindowSize from '@src/hooks/useWindowSize';
 
 const seo = {
   title: 'Jeffrey - Projects',
-  description: 'Explore my portfolio to see a range of frontend projects, from responsive websites to web applications. Discover my work with React, Nextjs, React three fiber, Electron and more.',
+  description: 'Eight websites for eight very different businesses, from data centres in Frankfurt to a wedding photographer in Kanyakumari. Each one told as a short story.',
   keywords: [
     'Jeffrey Hasan Projects',
     'Portfolio Showcase',
@@ -103,11 +100,13 @@ function Page() {
               >
                 <div className={clsx(styles.container, 'layout-grid-inner')}>
                   <div className={styles.projectsDetails}>
-                    <h6 className={clsx(styles.text, 'h6')}>{project.date}</h6>
+                    <h6 className={clsx(styles.text, 'h6')}>
+                      {project.date} — {project.sector}
+                    </h6>
                     <h3 className={clsx(styles.text, 'h3')}>{project.title}</h3>
                   </div>
                   <div className={styles.imageContainer}>
-                    <Image priority={index === 0} sizes="100%" src={project.img} fill alt={project.title} />
+                    <Image preload={index === 0} sizes="(max-width: 812px) 83vw, 48vw" src={project.img} fill alt={project.title} />
                   </div>
                 </div>
               </div>
@@ -118,8 +117,9 @@ function Page() {
                 className={styles.canvas}
               >
                 <Image
-                  priority={index === 0}
-                  sizes="100%"
+                  preload={index === 0}
+                  quality={60}
+                  sizes="100vw"
                   className={index === 0 ? styles.firstCard : index === projects.length - 1 ? styles.lastCard : undefined}
                   src={project.img}
                   fill

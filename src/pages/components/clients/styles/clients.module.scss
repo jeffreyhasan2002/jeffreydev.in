@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .root {
   position: relative;
@@ -59,12 +59,12 @@
   .first {
     grid-column: 1 / 6;
     height: 30vw;
+    border-radius: var(--layout-columns-gap);
+    box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 1) var(--white);
     @include mobile {
       grid-column: 2 / 7;
       height: 90vw;
     }
-    border-radius: var(--layout-columns-gap);
-    box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 1) var(--white);
 
     @include mobile {
       border-radius: calc(var(--layout-columns-gap) * 0.5);
@@ -141,9 +141,6 @@
       box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 0.5) var(--white);
     }
     &:before {
-      @include mobile {
-        content: none;
-      }
       z-index: 1;
       box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 0.15) var(--white);
 
@@ -153,6 +150,9 @@
       height: calc(var(--layout-columns-gap) * 4);
       position: absolute;
       top: calc(var(--layout-columns-gap) * -4);
+      @include mobile {
+        content: none;
+      }
     }
   }
   .secondText {
@@ -180,9 +180,6 @@
       box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 0.5) var(--white);
     }
     &:before {
-      @include mobile {
-        content: none;
-      }
       box-shadow: 0 0 0 calc(var(--layout-columns-gap) * 0.15) var(--white);
 
       z-index: 1;
@@ -192,6 +189,9 @@
       height: calc(var(--layout-columns-gap) * 4);
       position: absolute;
       top: calc(var(--layout-columns-gap) * -4);
+      @include mobile {
+        content: none;
+      }
     }
   }
   .fourthEmpty {

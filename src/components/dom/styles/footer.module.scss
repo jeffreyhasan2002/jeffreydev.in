@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .root {
   height: auto;
@@ -12,11 +12,11 @@
   }
   .linksContainer {
     padding-top: calc(var(--layout-columns-gap) * 4);
+
+    width: 100%;
     @include mobile {
       padding-top: calc(var(--layout-columns-gap) * 1.5);
     }
-
-    width: 100%;
     > div {
       width: 100%;
     }
@@ -72,14 +72,14 @@
   }
 
   .emailContaineer {
-    @include mobile {
-      grid-column: 1 / 7;
-      padding-top: var(--layout-columns-gap);
-    }
 
     padding-top: calc(var(--layout-columns-gap) * 4);
     width: min-content;
     grid-column: 9 / 17;
+    @include mobile {
+      grid-column: 1 / 7;
+      padding-top: var(--layout-columns-gap);
+    }
     .workWithMe {
       color: var(--white);
     }
@@ -148,11 +148,6 @@
   }
 
   .giats {
-    @include mobile {
-      grid-column: 1 / 6;
-      font-size: 22.2vw;
-      line-height: 17.428vw;
-    }
     align-self: flex-end;
     grid-column: 1 / 13;
 
@@ -160,19 +155,24 @@
     line-height: 12.628vw;
     transform: translate(-0.3vw, 2.1vw);
     color: var(--white);
+    @include mobile {
+      grid-column: 1 / 6;
+      font-size: 22.2vw;
+      line-height: 17.428vw;
+    }
     > span {
       display: inherit;
     }
   }
   .goToTop {
     position: relative;
+    align-self: flex-end;
+    justify-self: flex-end;
+    grid-column: 13 / 17;
 
     @include mobile {
       grid-column: 6 / 7;
     }
-    align-self: flex-end;
-    justify-self: flex-end;
-    grid-column: 13 / 17;
   }
 }
 .circleButton {
@@ -180,25 +180,19 @@
   box-shadow:
     0 0.32vw 0.52vw #0000000a,
     0 0.12vw 0.22vw #0000000a;
-  @include mobile {
-    width: 10vw;
-    height: 10vw;
-  }
   width: 4vw;
   height: 4vw;
   background-color: var(--white);
   border-radius: 50%;
   position: relative;
   overflow: hidden;
+  @include mobile {
+    width: 10vw;
+    height: 10vw;
+  }
 
   .arrowClassic {
     z-index: 2;
-    @include mobile {
-      width: 4vw;
-      height: 4vw;
-      top: 3.05vw;
-      left: 3.05vw;
-    }
     position: absolute;
     top: 1.25vw;
     left: 1.25vw;
@@ -207,6 +201,12 @@
     fill: var(--black);
     stroke: var(--black);
     transform: translateY(0vw) rotate(180deg);
+    @include mobile {
+      width: 4vw;
+      height: 4vw;
+      top: 3.05vw;
+      left: 3.05vw;
+    }
   }
 
   .ball {

@@ -1,25 +1,22 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, useEffect, useMemo } from 'react';
 
 import FluidEffect from '@src/components/canvas/fluid/effect/FluidEffect';
-import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 
-const FluidEffectWrapper = forwardRef((props, ref) => {
-  const effect = useMemo(() => new FluidEffect(props), [JSON.stringify(props)]);
+// The effect is created once; colour/intensity changes are pushed into its state and
+// eased on the GPU side, so there is no shader rebuild when the fluid colour changes.
+const FluidEffectWrapper = forwardRef(({ tFluid, intensity = 1.0, fluidColor = '#ffffff', backgroundColor = '#000000' }, ref) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const effect = useMemo(() => new FluidEffect({ tFluid, intensity, fluidColor, backgroundColor }), []);
 
-  useIsomorphicLayoutEffect(
-    () => () => {
-      if (effect) effect.dispose();
-    },
-    [effect],
-  );
+  useEffect(() => {
+    effect.state.fluidColor = fluidColor;
+    effect.state.backgroundColor = backgroundColor;
+    effect.state.intensity = intensity;
+  }, [effect, fluidColor, backgroundColor, intensity]);
+
+  useEffect(() => () => effect.dispose(), [effect]);
 
   return <primitive ref={ref} object={effect} />;
 });
-
-FluidEffectWrapper.defaultProps = {
-  intensity: 1.0,
-  fluidColor: '#ffffff',
-  backgroundColor: '#000000',
-};
 
 export default FluidEffectWrapper;

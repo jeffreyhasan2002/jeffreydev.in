@@ -1,7 +1,11 @@
+import { Uniform, Vector3 } from 'three';
+
 import { Effect } from 'postprocessing';
-import { Uniform } from 'three';
-import fragmentShader from '@src/components/canvas/fluid/glsl/post.frag';
+import fragmentShader from '@src/components/canvas/fluid/glsl/post.frag.js';
 import hexToRgb from '@src/components/canvas/fluid/utils';
+
+// How fast the fluid tint eases toward a new colour (higher = snappier).
+const COLOR_EASE = 5;
 
 class FluidEffect extends Effect {
   constructor({ tFluid, intensity = 1.0, fluidColor = '#ffffff', backgroundColor = '#000000' } = {}) {
@@ -17,36 +21,33 @@ class FluidEffect extends Effect {
     super('FluidEffect', fragmentShader, { uniforms });
 
     this.state = {
-      tFluid,
       intensity,
       fluidColor,
       backgroundColor,
-      cachedFluidColor: hexToRgb(fluidColor),
-      cachedBackgroundColor: hexToRgb(backgroundColor),
     };
+    this.cachedFluidColor = fluidColor;
+    this.cachedBackgroundColor = backgroundColor;
+    this.targetColor = new Vector3().copy(this.uniforms.get('uColor').value);
   }
 
-  updateUniform(key, value) {
-    const uniform = this.uniforms.get(key);
-    if (uniform && uniform.value !== value) {
-      uniform.value = value;
-    }
+  setTexture(texture) {
+    this.uniforms.get('tFluid').value = texture;
   }
 
-  update() {
-    const newFluidColor = hexToRgb(this.state.fluidColor);
-    if (newFluidColor !== this.state.cachedFluidColor) {
-      this.state.cachedFluidColor = newFluidColor;
-      this.updateUniform('uColor', newFluidColor);
+  update(renderer, inputBuffer, deltaTime = 0.016) {
+    if (this.state.fluidColor !== this.cachedFluidColor) {
+      this.cachedFluidColor = this.state.fluidColor;
+      this.targetColor.copy(hexToRgb(this.state.fluidColor));
     }
 
-    const newBackgroundColor = hexToRgb(this.state.backgroundColor);
-    if (newBackgroundColor !== this.state.cachedBackgroundColor) {
-      this.state.cachedBackgroundColor = newBackgroundColor;
-      this.updateUniform('uBackgroundColor', newBackgroundColor);
+    if (this.state.backgroundColor !== this.cachedBackgroundColor) {
+      this.cachedBackgroundColor = this.state.backgroundColor;
+      this.uniforms.get('uBackgroundColor').value.copy(hexToRgb(this.state.backgroundColor));
     }
 
-    this.updateUniform('uIntensity', this.state.intensity);
+    // Ease the tint so hovering between projects blends colours instead of snapping.
+    this.uniforms.get('uColor').value.lerp(this.targetColor, 1 - Math.exp(-deltaTime * COLOR_EASE));
+    this.uniforms.get('uIntensity').value = this.state.intensity;
   }
 }
 

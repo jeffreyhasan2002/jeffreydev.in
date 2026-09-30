@@ -1,15 +1,14 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import Home from '@src/pages/components/home/Index';
 import About from '@src/pages/components/about/Index';
 import Quote from '@src/pages/components/quote/Index';
 import Projects from '@src/pages/components/projects/Index';
+import WorkIndex from '@src/pages/components/workIndex/Index';
 import Clients from '@src/pages/components/clients/Index';
 import CustomHead from '@src/components/dom/CustomHead';
 
 const seo = {
   title: 'Jeffrey - Frontend Developer Portfolio',
-  description:
-    'Self-taught front-end developer from India, crafting sleek and efficient web, desktop, and mobile apps. Combining creativity and technical skill to deliver innovative user-centric solutions.',
+  description: 'Jeffrey Hasan is a front-end developer from India building story-driven websites for businesses in India, Germany, Malaysia and the USA, from data centres to wedding photographers.',
   keywords: [
     'Jeffrey',
     'Jeffrey Hasan',
@@ -46,6 +45,7 @@ function Page() {
       <Clients />
       <Quote />
       <Projects />
+      <WorkIndex />
     </>
   );
 }

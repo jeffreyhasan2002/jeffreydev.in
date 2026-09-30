@@ -4,7 +4,7 @@ import AppearByWords from '@src/components/animationComponents/appearByWords/Ind
 import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
 import Arrow from '@src/components/imageComponents/Arrow';
 import MagicBall from '@src/pages/about/components/magicball/MagicBall';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import clsx from 'clsx';
 import containt from '@src/pages/about/components/services/constants/Containt';
 import { gsap } from 'gsap';
@@ -13,9 +13,7 @@ import useIsMobile from '@src/hooks/useIsMobile';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
-import { useWindowSize } from '@darkroom.engineering/hamo';
-
-/* eslint-disable react/no-array-index-key */
+import useWindowSize from '@src/hooks/useWindowSize';
 
 const colors = ['#8A2BE2', '#FFFF00', '#DC143C'];
 

@@ -1,4 +1,4 @@
-@import '@src/styles/functions';
+@use '@src/styles/functions' as *;
 
 .root {
   position: relative;
@@ -66,10 +66,10 @@
       }
       > img {
         object-fit: cover;
+        border-radius: calc(var(--layout-columns-gap) * 1);
         @include mobile {
           border-radius: calc(var(--layout-columns-gap) * 0.5);
         }
-        border-radius: calc(var(--layout-columns-gap) * 1);
       }
     }
   }

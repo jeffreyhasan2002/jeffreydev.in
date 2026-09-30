@@ -1,18 +1,18 @@
 import { ShaderMaterial, Texture, Vector2, Vector3 } from 'three';
 
-import advectionFrag from '@src/components/canvas/fluid/glsl/advection.frag';
-import baseVertex from '@src/components/canvas/fluid/glsl/base.vert';
-import clearFrag from '@src/components/canvas/fluid/glsl/clear.frag';
-import curlFrag from '@src/components/canvas/fluid/glsl/curl.frag';
-import divergenceFrag from '@src/components/canvas/fluid/glsl/divergence.frag';
-import gradientSubstractFrag from '@src/components/canvas/fluid/glsl/gradientSubstract.frag';
-import pressureFrag from '@src/components/canvas/fluid/glsl/pressure.frag';
-import splatFrag from '@src/components/canvas/fluid/glsl/splat.frag';
+import advectionFrag from '@src/components/canvas/fluid/glsl/advection.frag.js';
+import baseVertex from '@src/components/canvas/fluid/glsl/base.vert.js';
+import clearFrag from '@src/components/canvas/fluid/glsl/clear.frag.js';
+import curlFrag from '@src/components/canvas/fluid/glsl/curl.frag.js';
+import divergenceFrag from '@src/components/canvas/fluid/glsl/divergence.frag.js';
+import gradientSubstractFrag from '@src/components/canvas/fluid/glsl/gradientSubstract.frag.js';
+import pressureFrag from '@src/components/canvas/fluid/glsl/pressure.frag.js';
+import splatFrag from '@src/components/canvas/fluid/glsl/splat.frag.js';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 import { useMemo } from 'react';
 import useOpts from '@src/components/canvas/fluid/hooks/useOpts';
 import { useThree } from '@react-three/fiber';
-import vorticityFrag from '@src/components/canvas/fluid/glsl/vorticity.frag';
+import vorticityFrag from '@src/components/canvas/fluid/glsl/vorticity.frag.js';
 
 const useMaterials = () => {
   const size = useThree((s) => s.size);

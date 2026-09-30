@@ -14,6 +14,9 @@ function Layout({ children, layoutRef, mainRef, router }) {
   );
 
   const enterTimelineRef = useRef();
+  // react-transition-group falls back to ReactDOM.findDOMNode (removed in React 19) without a nodeRef.
+  // The GSAP timelines target layout/main directly, so an empty ref is enough here.
+  const transitionNodeRef = useRef(null);
   const exitTimelineRef = useRef();
 
   const [isEntering, setIsEntering] = useState(false);
@@ -216,6 +219,7 @@ function Layout({ children, layoutRef, mainRef, router }) {
       <SwitchTransition>
         <ReactTransition
           key={router.asPath}
+          nodeRef={transitionNodeRef}
           in={false}
           unmountOnExit
           timeout={{

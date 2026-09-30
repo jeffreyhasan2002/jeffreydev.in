@@ -9,12 +9,13 @@ import projectsLinks from '@src/components/dom/navbar/constants/projectsLinks';
 import styles from '@src/components/dom/navbar/styles/menuLinks.module.scss';
 import useIsMobile from '@src/hooks/useIsMobile';
 import { useRouter } from 'next/router';
+import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
 
 function MenuLinks() {
   const timeline = useRef(gsap.timeline({ paused: true, defaults: { duration: 0.92, ease: 'expo.inOut' } }));
   const isMobile = useIsMobile();
-  const [isMenuOpen, setIsMenuOpen, lenis, isLoading] = useStore((state) => [state.isMenuOpen, state.setIsMenuOpen, state.lenis, state.isLoading]);
+  const [isMenuOpen, setIsMenuOpen, lenis, isLoading] = useStore(useShallow((state) => [state.isMenuOpen, state.setIsMenuOpen, state.lenis, state.isLoading]));
   const menuRef = useRef();
   const menuLinksItemsRef = useRef([]);
   const router = useRouter();
