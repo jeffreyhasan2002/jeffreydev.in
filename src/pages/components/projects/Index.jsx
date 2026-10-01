@@ -63,7 +63,7 @@ function Projects() {
           <AppearByWords>Selected Projects</AppearByWords>
         </h1>
       </section>
-      <section ref={rootRef} className={clsx(styles.root, 'layout-block-inner')}>
+      <section ref={rootRef} data-header-theme="dark" className={clsx(styles.root, 'layout-block-inner')}>
         <div className={styles.innerContainer}>
           {newProjects.map((project, index) => (
             <Link aria-label={`Go ${project.title}`} id={project.id} key={project.id} scroll={false} href={project.link} className={clsx(styles.card)}>
@@ -88,7 +88,7 @@ function Projects() {
                     </h6>
                     <h3 className="h3">{project.title}</h3>
                   </div>
-                  <div className={styles.imageContainer}>
+                  <div data-header-theme={project.coverTone || 'light'} className={styles.imageContainer}>
                     <Image src={project.img} fill sizes="(max-width: 812px) 83vw, 48vw" alt={project.title} />
                   </div>
                 </div>

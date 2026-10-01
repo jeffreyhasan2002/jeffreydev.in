@@ -88,7 +88,8 @@ $ink: #f3f3ef;
   box-shadow:
     0 2.4vw 4vw -1.6vw rgba(0, 0, 0, 0.55),
     0 0 0 1px rgba(255, 255, 255, 0.08);
-  will-change: clip-path, transform;
+  transform-origin: 50% 0%;
+  will-change: transform;
   @include mobile {
     border-radius: 2vw;
   }

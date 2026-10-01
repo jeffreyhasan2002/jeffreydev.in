@@ -59,6 +59,14 @@
       --webkit-appearance: none;
     } /* Firefox */
 
+    /* Touch devices: native momentum scrolling instead of JS-emulated touch. */
+    @media (hover: none) and (pointer: coarse) {
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
     .mainContainer {
       height: auto;
 

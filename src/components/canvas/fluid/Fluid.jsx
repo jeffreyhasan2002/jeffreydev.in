@@ -7,8 +7,11 @@ import useFBOs from '@src/components/canvas/fluid/hooks/useFBOs';
 import useMaterials from '@src/components/canvas/fluid/hooks/useMaterials';
 import useOpts from '@src/components/canvas/fluid/hooks/useOpts';
 import usePointerEvents from '@src/components/canvas/fluid/hooks/usePointerEvents';
+import { useStore } from '@src/store';
 
-function Fluid({ mainRef, fluidColor }) {
+function Fluid({ mainRef }) {
+  // Subscribed here (inside the canvas) so colour changes don't re-render <EffectComposer>.
+  const fluidColor = useStore((state) => state.fluidColor);
   const OPTS = useOpts();
   const { force, radius, curl, swirl, intensity, backgroundColor, showBackground, pressure, densityDissipation, velocityDissipation } = OPTS;
   const size = useThree((three) => three.size);

@@ -55,6 +55,6 @@
 #menu,
 main,
 #scrollbar,
-header {
+#siteHeader {
   will-change: transform, opacity;
 }

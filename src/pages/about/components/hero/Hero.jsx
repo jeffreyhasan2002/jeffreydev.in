@@ -51,7 +51,7 @@ function Hero() {
         <h2 className={clsx(styles.title, 'h2')}>Creating pixel-perfect interfaces from design to deployment.</h2>
       </header>
       <div className={styles.wrapper}>
-        <div ref={heroImageRef} className={styles.imageContainer}>
+        <div ref={heroImageRef} data-header-theme="dark" className={styles.imageContainer}>
           <Image preload quality={100} src="/giats/back.webp" sizes="(max-width: 812px) 100vw, 60vw" fill alt="Jeffrey Hasan" />
         </div>
       </div>

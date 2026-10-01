@@ -6,16 +6,17 @@ import { gsap } from 'gsap';
 import styles from '@src/pages/projects/components/projectStory/styles/projectStory.module.scss';
 import useIsMobile from '@src/hooks/useIsMobile';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
 import useWindowSize from '@src/hooks/useWindowSize';
+import warmImages from '@src/utils/warmImages';
 
 const pad = (n) => String(n).padStart(2, '0');
 
 function BrowserFrame({ src, domain, alt, preload }) {
   return (
-    <figure data-reveal className={styles.browser}>
+    <figure data-reveal data-header-theme="light" className={styles.browser}>
       <div className={styles.bar} aria-hidden="true">
         <span className={styles.dots}>
           <i />
@@ -44,7 +45,7 @@ function ProjectStory({ project, onChapterChange }) {
     const scroller = document.querySelector('main');
 
     const ctx = gsap.context(() => {
-      // Frames open like a window as they scroll in.
+      // Frames rise and settle as they scroll in (transform-only, so no per-frame repaint).
       gsap.utils.toArray('[data-reveal]').forEach((frame) => {
         const shot = frame.querySelector('img');
         gsap
@@ -58,7 +59,7 @@ function ProjectStory({ project, onChapterChange }) {
               invalidateOnRefresh: true,
             },
           })
-          .fromTo(frame, { clipPath: 'inset(6% 5% 6% 5% round 1.2vw)', y: 60 }, { clipPath: 'inset(0% 0% 0% 0% round 0.9vw)', y: 0, ease: 'power2.out' }, 0)
+          .fromTo(frame, { y: 80, scale: 0.94 }, { y: 0, scale: 1, ease: 'power2.out' }, 0)
           .fromTo(shot, { scale: 1.1 }, { scale: 1, ease: 'power2.out' }, 0);
       });
 
@@ -108,8 +109,15 @@ function ProjectStory({ project, onChapterChange }) {
     return () => ctx.revert();
   }, [isLoading, isMobile, windowSize.width, project.id]);
 
+  // Once the page is live, quietly load + decode the rest of the screenshots so scrolling
+  // never waits on a large image decode.
+  useIsomorphicLayoutEffect(() => {
+    if (isLoading || !rootRef.current) return undefined;
+    return warmImages(rootRef.current.querySelectorAll('img'));
+  }, [isLoading, project.id]);
+
   return (
-    <div ref={rootRef} className={styles.root}>
+    <div ref={rootRef} data-header-theme="dark" className={styles.root}>
       {project.story.map((chapter, i) => (
         <article key={chapter.label} id={`chapter-${i}`} data-chapter className={styles.chapter}>
           <header data-rise className={styles.text}>
@@ -137,7 +145,7 @@ function ProjectStory({ project, onChapterChange }) {
         </header>
         <div className={styles.phones}>
           {project.mobile.map((src, i) => (
-            <div key={src} data-phone className={styles.phone}>
+            <div key={src} data-phone data-header-theme="light" className={styles.phone}>
               <span className={styles.notch} aria-hidden="true" />
               <div className={styles.phoneScreen}>
                 <Image src={src} fill sizes="(max-width: 812px) 30vw, 16vw" alt={`${project.title} on mobile, view ${i + 1}`} />
@@ -173,4 +181,6 @@ function ProjectStory({ project, onChapterChange }) {
   );
 }
 
-export default ProjectStory;
+// Memoised: the page re-renders when the active chapter changes (left column highlight);
+// the story itself (images, triggers) doesn't need to.
+export default memo(ProjectStory);

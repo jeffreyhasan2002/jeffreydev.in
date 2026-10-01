@@ -143,8 +143,10 @@ export default function FloatRigidBody({ totalCount, transparentCount }) {
       <InstancedRigidBodies type="dynamic" ref={apiTransparent} colliders="ball" instances={transparentInstances} linearDamping={50} angularDamping={50} friction={0.1}>
         <instancedMesh dispose={null} castShadow receiveShadow args={[null, null, transparentCount]}>
           <sphereGeometry />
+          {/* Fewer samples + a capped buffer: transmission re-renders the scene into an FBO each frame. */}
           <MeshTransmissionMaterial
-            samples={10}
+            samples={6}
+            resolution={isMobile ? 256 : 512}
             transmission={1.0}
             roughness={0}
             thickness={4}

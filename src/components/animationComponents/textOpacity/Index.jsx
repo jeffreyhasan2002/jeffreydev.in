@@ -14,7 +14,6 @@ function TextOpacity({ children, trigger }) {
     gsap.fromTo(
       splitted.words,
       {
-        'will-change': 'opacity, transform',
         z: () => gsap.utils.random(500, 950),
         opacity: 0,
         xPercent: () => gsap.utils.random(-100, 100),

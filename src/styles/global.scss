@@ -17,8 +17,9 @@ html {
   }
 }
 
+// Beats the touch-device overflow in app.module.scss, so transitions and the menu still lock scroll.
 main.lenis-stopped {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 body {

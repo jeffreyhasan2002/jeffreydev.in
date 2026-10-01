@@ -161,8 +161,11 @@
         > img {
           border-radius: var(--layout-columns-gap);
           object-fit: cover;
+          // Soft-focus backdrop so the title reads over a busy screenshot.
+          filter: blur(14px) saturate(1.15);
           @include mobile {
             border-radius: calc(var(--layout-columns-gap) * 0.5);
+            filter: blur(10px) saturate(1.15);
           }
         }
       }

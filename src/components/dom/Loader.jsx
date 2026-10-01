@@ -32,7 +32,7 @@ function Loader() {
             innerText: 1,
           },
           onComplete: () => {
-            gsap.set('header', {
+            gsap.set('#siteHeader', {
               autoAlpha: 0,
               ease: 'power2.inOut',
             });
@@ -74,7 +74,7 @@ function Loader() {
                 duration: 1,
               });
             });
-            lenis.scrollTo(0, { force: true });
+            lenis.scrollTo(0, { immediate: true, force: true });
             gsap.set(document?.getElementById('layout'), {
               height: '90%',
             });
@@ -83,7 +83,8 @@ function Loader() {
               x: '100%',
               scale: 0.9,
               opacity: 1,
-              border: '2px solid #f0f4f1',
+              outline: '2px solid #f0f4f1',
+              outlineOffset: '-2px',
               borderRadius: '1.3888888889vw',
             });
 
@@ -120,7 +121,7 @@ function Loader() {
               duration: 0.5,
               height: '100%',
             });
-            gsap.to('header', {
+            gsap.to('#siteHeader', {
               delay: 2.3,
               duration: 0.5,
               ease: 'power2.inOut',
@@ -130,7 +131,7 @@ function Loader() {
               ease: 'power2.inOut',
               delay: 2.7,
               height: 'auto',
-              border: 'none',
+              outline: 'none',
               pointerEvents: 'auto',
               onComplete: () => {
                 setIntroOut(true);

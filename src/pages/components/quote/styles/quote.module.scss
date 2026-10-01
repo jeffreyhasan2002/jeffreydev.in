@@ -5,6 +5,10 @@
   background-color: var(--white);
   width: 100%;
   height: 300svh;
+  // Shorter on phones: three screens of mostly-empty scroll felt like the page had stalled.
+  @include mobile {
+    height: 190svh;
+  }
   .text {
     text-align: center;
     width: 100%;

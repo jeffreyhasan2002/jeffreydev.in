@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import { useFrame, useThree } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 import fragmentShader from '@src/components/canvas/background/shaders/fragmentShader';
 import useWindowSize from '@src/hooks/useWindowSize';
@@ -41,12 +41,17 @@ function Background() {
       uOffsetX: { value: 0.34 },
       uOffsetY: { value: 0.0 },
       uLinesAmount: { value: 5.0 },
-      uPlaneRes: { value: new THREE.Vector2(windowSize.width, windowSize.height) },
+      uPlaneRes: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
       uMouse2D: { value: new THREE.Vector2(1.0, 1.0) },
       uBackgroundScale: { value: 3.0 },
     }),
-    [windowSize],
+    // Built once: a new uniforms object would recreate (and recompile) the material on resize.
+    [],
   );
+
+  useEffect(() => {
+    if (windowSize.width && windowSize.height) uniforms.uPlaneRes.value.set(windowSize.width, windowSize.height);
+  }, [uniforms, windowSize.width, windowSize.height]);
 
   useFrame((state, delta) => {
     if (ref.current && ref.current.material && ref.current.material.uniforms) {

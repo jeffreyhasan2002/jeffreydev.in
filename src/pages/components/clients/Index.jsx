@@ -33,8 +33,10 @@ function Clients() {
                 invalidateOnRefresh: true,
               },
             })
+            // Same end position as tweening `top` (CSS sets the start), but as a transform so
+            // scrolling doesn't relayout the page every frame.
             .to(textRef, {
-              top: `${10 + 30 * index + 5.5555556 * index}vw`,
+              y: () => ((10 + 30 * index + 5.5555556 * index) * window.innerWidth) / 100 - parseFloat(getComputedStyle(textRef).top),
             });
         });
       }
@@ -63,6 +65,7 @@ function Clients() {
         ref={(el) => {
           badgeRefs.current[0] = el;
         }}
+        data-header-theme="dark"
         className={styles.first}
       >
         <Badge name="company1" />
@@ -124,6 +127,7 @@ function Clients() {
         ref={(el) => {
           badgeRefs.current[1] = el;
         }}
+        data-header-theme="dark"
         className={styles.second}
       >
         <Badge name="company2" />
@@ -180,6 +184,7 @@ function Clients() {
         ref={(el) => {
           badgeRefs.current[2] = el;
         }}
+        data-header-theme="dark"
         className={styles.third}
       >
         <Badge name="company3" />

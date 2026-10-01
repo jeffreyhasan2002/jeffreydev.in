@@ -167,6 +167,11 @@
         > img {
           border-radius: 0px !important;
           object-fit: cover;
+          // Soft-focus backdrop: the covers are full screenshots, and their text competed with the card title.
+          filter: blur(14px) saturate(1.15);
+          @include mobile {
+            filter: blur(10px) saturate(1.15);
+          }
         }
 
         .firstCard {

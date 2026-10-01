@@ -80,7 +80,7 @@ function Page() {
       <section className={clsx(styles.titleContainer, 'layout-block-inner')}>
         <h1 className={clsx(styles.title, 'h1')}>All Projects</h1>
       </section>
-      <section ref={rootRef} className={clsx(styles.root, 'layout-block-inner')}>
+      <section ref={rootRef} data-header-theme="dark" className={clsx(styles.root, 'layout-block-inner')}>
         <div className={styles.innerContainer}>
           {projects.map((project, index) => (
             <Link aria-label={`Go ${project.title}`} id={project.id} key={project.id} scroll={false} href={project.link} className={clsx(styles.card)}>
@@ -105,7 +105,7 @@ function Page() {
                     </h6>
                     <h3 className={clsx(styles.text, 'h3')}>{project.title}</h3>
                   </div>
-                  <div className={styles.imageContainer}>
+                  <div data-header-theme={project.coverTone || 'light'} className={styles.imageContainer}>
                     <Image preload={index === 0} sizes="(max-width: 812px) 83vw, 48vw" src={project.img} fill alt={project.title} />
                   </div>
                 </div>

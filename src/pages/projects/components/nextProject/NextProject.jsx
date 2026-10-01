@@ -12,7 +12,7 @@ function NextProject({ nextProject }) {
           <AppearByWords>Next Project</AppearByWords>
         </h1>
       </section>
-      <section className={clsx(styles.nextRoot, 'layout-block-inner')}>
+      <section data-header-theme="dark" className={clsx(styles.nextRoot, 'layout-block-inner')}>
         <div className={styles.innerContainer}>
           <Link aria-label={`Go ${nextProject.title}`} id={nextProject.id} scroll={false} href={nextProject.link} className={clsx(styles.card)}>
             <div className={styles.projectsWrap}>
@@ -24,7 +24,7 @@ function NextProject({ nextProject }) {
 
                   <h3 className={clsx(styles.text, 'h3')}>{nextProject.title}</h3>
                 </div>
-                <div className={styles.imageContainer}>
+                <div data-header-theme={nextProject.coverTone || 'light'} className={styles.imageContainer}>
                   <Image sizes="(max-width: 812px) 83vw, 48vw" src={nextProject.img} fill alt={nextProject.title} />
                 </div>
               </div>

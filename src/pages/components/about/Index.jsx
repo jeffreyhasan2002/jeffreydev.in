@@ -15,10 +15,11 @@ function About() {
 
   const setupScrollAnimation = () => {
     const ctx = gsap.context(() => {
-      gsap.set(animatedImageRef.current, { top: !isMobile ? '-20vw' : '0' });
+      // Parallax via transform (y), not `top`: `top` forces a page layout on every scroll frame.
+      gsap.set(animatedImageRef.current, { y: !isMobile ? '-20vw' : 0 });
       if (!isMobile) {
         gsap.to(animatedImageRef.current, {
-          top: '20vw',
+          y: '20vw',
           ease: 'none',
           scrollTrigger: {
             trigger: rootRef.current,

@@ -18,8 +18,8 @@
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  padding-top: calc(var(--layout-columns-gap) * 2);
-  padding-bottom: calc(var(--layout-columns-gap) * 2);
+  padding-top: calc(var(--layout-columns-gap) * 1.6);
+  padding-bottom: calc(var(--layout-columns-gap) * 1.6);
 
   height: inherit;
   color: var(--white);
@@ -60,7 +60,10 @@
 
 .menuList {
   counter-reset: menuList;
-  margin-bottom: calc(var(--layout-columns-gap) * 2);
+  margin-bottom: calc(var(--layout-columns-gap) * 1.2);
+  @include mobile {
+    margin-bottom: calc(var(--layout-columns-gap) * 0.7);
+  }
   &::before {
     position: relative;
     font-size: 2.3vw;
@@ -79,7 +82,7 @@
       content: 'Sitemap';
 
       font-weight: 700;
-      margin-bottom: var(--layout-columns-gap);
+      margin-bottom: calc(var(--layout-columns-gap) * 0.6);
     }
   }
 
@@ -89,7 +92,7 @@
       font-weight: 700;
       content: 'Selected Projects';
 
-      margin-bottom: var(--layout-columns-gap);
+      margin-bottom: calc(var(--layout-columns-gap) * 0.6);
     }
   }
   &:nth-child(3) {
@@ -102,7 +105,7 @@
     &::before {
       font-weight: 700;
       content: 'Follow Us';
-      margin-bottom: var(--layout-columns-gap);
+      margin-bottom: calc(var(--layout-columns-gap) * 0.6);
     }
   }
 }
@@ -114,7 +117,10 @@
   text-indent: 0;
   cursor: pointer;
   pointer-events: auto;
-  margin-bottom: var(--layout-columns-gap);
+  margin-bottom: calc(var(--layout-columns-gap) * 0.55);
+  @include mobile {
+    margin-bottom: calc(var(--layout-columns-gap) * 0.4);
+  }
   &::after {
     content: '';
     position: absolute;
@@ -146,7 +152,7 @@
   }
 
   span {
-    font-size: 1.9vw;
+    font-size: 1.65vw;
     display: block;
     color: var(--white);
     text-decoration: none;

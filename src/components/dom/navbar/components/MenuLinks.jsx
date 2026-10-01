@@ -24,7 +24,7 @@ function MenuLinks() {
     const fluidCanvas = document?.getElementById('fluidCanvas');
     const layout = document?.getElementById('layout');
     const scrollbar = document?.getElementById('scrollbar');
-    const header = document?.querySelector('header');
+    const header = document?.getElementById('siteHeader');
 
     gsap.set(refs.menuRef.current, { pointerEvents: 'none', autoAlpha: 0 });
     gsap.set(refs.menuLinksItemsRef.current, { x: '-100%' });
@@ -33,10 +33,12 @@ function MenuLinks() {
       .to(refs.menuRef.current, { autoAlpha: 1, stagger: 0.01, pointerEvents: 'auto' }, 0)
       .to(fluidCanvas, { duration: 0, opacity: 0 }, 0)
       .to(refs.menuLinksItemsRef.current, { x: 0, stagger: 0.016, pointerEvents: 'auto' }, 0)
-      .to('main', { borderRadius: '1.3888888889vw', border: '2px solid #f0f4f1', scale: 0.9, pointerEvents: 'none', left: '-40vw' }, 0)
-      .to(layout, { opacity: isMobile ? 0.05 : 0.3, height: '90svh' }, 0)
-      .to(scrollbar, { opacity: 0, right: '46vw', scale: 0.9 }, 0)
-      .to(header, { autoAlpha: 0, left: '-40vw', top: isMobile ? '6vw' : '3vw', scale: 0.9, overwrite: true }, 0);
+      // Transforms only (x/y/scale): animating left/top/border-radius relayouts or repaints every frame.
+      .set('main', { borderRadius: '1.3888888889vw', outline: '2px solid #f0f4f1', outlineOffset: '-2px' }, 0)
+      .to('main', { scale: 0.9, pointerEvents: 'none', x: '-40vw' }, 0)
+      .to(layout, { opacity: isMobile ? 0 : 0.3 }, 0)
+      .to(scrollbar, { opacity: 0, x: '-45vw', scale: 0.9 }, 0)
+      .to(header, { autoAlpha: 0, x: '-40vw', y: isMobile ? '6vw' : '3vw', scale: 0.9, overwrite: true }, 0);
   };
 
   useEffect(() => {

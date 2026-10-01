@@ -216,6 +216,7 @@ const projects = [
     role: 'Design & Development',
     stack: ['Next.js', 'Tailwind CSS', 'Dark design system'],
     tagline: 'Deep-tech engineering made intuitive, in the dark with one violet light.',
+    coverTone: 'dark',
     featured: true,
     primary: '#F3EEFF',
     secondary: '#0B0716',

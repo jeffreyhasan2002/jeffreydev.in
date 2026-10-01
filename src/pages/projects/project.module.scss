@@ -4,13 +4,19 @@
   position: relative;
   padding-top: 0px;
 
+  // Pinned with CSS sticky (inside the <main> scroll container) rather than a ScrollTrigger
+  // pin: no per-frame transforms, so it can't jitter or drift while Lenis scrolls.
+  // No z-index and no downward shadow: with either, the column's white shadow painted over
+  // the "Next Project" heading once the sticky column reached the end of the story.
   .leftContainer {
+    position: sticky;
+    top: 0;
+    align-self: start;
     height: 100svh;
     grid-column: 1 / 7;
-    box-shadow:
-      0 0 0 var(--layout-columns-gap) var(--white),
-      0 calc(var(--layout-columns-gap) * 10) 0 0 var(--white);
+    box-shadow: 0 0 0 var(--layout-columns-gap) var(--white);
     @include mobile {
+      position: relative;
       height: auto;
       box-shadow: 0 0 0 var(--layout-columns-gap) var(--white);
     }

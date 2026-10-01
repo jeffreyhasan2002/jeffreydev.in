@@ -28,6 +28,11 @@
     > a {
       pointer-events: all;
     }
+
+    .logo {
+      color: var(--black);
+      transition: color 0.35s ease-in-out;
+    }
     .rightContainer {
       pointer-events: all;
 
@@ -36,4 +41,9 @@
       align-items: center;
     }
   }
+}
+
+// Logo over a region marked data-header-theme="dark" (see navbar/Index.jsx).
+.root.onDark .innerHeader .logo {
+  color: #f3f3ef;
 }

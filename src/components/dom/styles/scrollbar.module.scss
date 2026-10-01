@@ -19,6 +19,8 @@
   }
   .inner {
     position: absolute;
+    top: 0;
+    will-change: transform;
 
     width: 0.25vw;
     height: 6svh;

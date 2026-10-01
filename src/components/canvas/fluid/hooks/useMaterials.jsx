@@ -113,7 +113,7 @@ const useMaterials = () => {
           value: new Texture(),
         },
         aspectRatio: {
-          value: size.width / size.height,
+          value: 1,
         },
         uColor: {
           value: new Vector3(),
@@ -162,13 +162,12 @@ const useMaterials = () => {
       advection,
       vorticity,
     };
-  }, [OPTS.curl, OPTS.pressure, OPTS.radius, size.height, size.width]);
+    // Materials are built once; size changes only update uniforms below. (Rebuilding them on
+    // every resize recompiled 8 shaders per frame while page transitions resize the canvas.)
+  }, [OPTS.curl, OPTS.pressure, OPTS.radius]);
 
   useIsomorphicLayoutEffect(() => {
     Object.values(shaderMaterials).forEach((material) => {
-      const aspectRatio = size.width / (size.height + 400);
-
-      material.uniforms.texelSize.value.set(1 / (OPTS.simRes * aspectRatio), 1 / OPTS.simRes);
       material.vertexShader = baseVertex;
       material.depthTest = false;
       material.depthWrite = false;
@@ -179,7 +178,16 @@ const useMaterials = () => {
         material.dispose();
       });
     };
-  }, [shaderMaterials, size]);
+  }, [shaderMaterials]);
+
+  useIsomorphicLayoutEffect(() => {
+    if (!size.width || !size.height) return;
+    const aspectRatio = size.width / (size.height + 400);
+    Object.values(shaderMaterials).forEach((material) => {
+      material.uniforms.texelSize.value.set(1 / (OPTS.simRes * aspectRatio), 1 / OPTS.simRes);
+    });
+    shaderMaterials.splat.uniforms.aspectRatio.value = size.width / size.height;
+  }, [shaderMaterials, size.width, size.height, OPTS.simRes]);
 
   return shaderMaterials;
 };

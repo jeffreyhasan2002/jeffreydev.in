@@ -12,6 +12,7 @@ import useIsMobile from '@src/hooks/useIsMobile';
 import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect';
 import useScroll from '@src/hooks/useScroll';
 import { useShallow } from 'zustand/react/shallow';
+import warmImages from '@src/utils/warmImages';
 
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -104,6 +105,26 @@ function WorkIndex() {
   }, [active, isMobile, setFluidColor]);
 
   useEffect(() => () => setFluidColor(DEFAULT_FLUID_COLOR), [setFluidColor]);
+
+  // Decode the preview reel before the first hover reveals it (otherwise all 8 covers decode
+  // and rasterise in one frame on the first hover).
+  useEffect(() => {
+    if (isMobile || !listRef.current || !previewRef.current) return undefined;
+    let cancel;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        cancel = warmImages(previewRef.current.querySelectorAll('img'));
+      },
+      { rootMargin: '150% 0px' },
+    );
+    observer.observe(listRef.current);
+    return () => {
+      observer.disconnect();
+      cancel?.();
+    };
+  }, [isMobile]);
 
   return (
     <section className={clsx(styles.root, 'layout-block-inner')}>
